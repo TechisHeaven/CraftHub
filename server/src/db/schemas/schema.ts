@@ -8,9 +8,9 @@ import {
 
 export const user = mysqlTable("user", {
   id: serial("id").autoincrement().primaryKey(),
-  name: text("name"),
-  email: text("email"),
-  password: text("password"),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  password: text("password").notNull(),
   role: text("role").$type<"admin" | "customer">(),
   createdAt: timestamp("created_at"),
 });

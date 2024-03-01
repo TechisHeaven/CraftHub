@@ -8,6 +8,13 @@
       "when": 1709239955145,
       "tag": "0000_mushy_norrin_radd",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709293530486,
+      "tag": "0001_worthless_black_tarantula",
+      "breakpoints": true
     }
   ]
 }

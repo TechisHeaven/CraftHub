@@ -2,27 +2,31 @@ import express from "express";
 import dotenv from "dotenv";
 import { db } from "./db/connection";
 import { user } from "./db/schemas/schema";
-
+import errorHandler from "./utils/error.handler";
+const authRoutes = require("./routes/auth.routes");
 dotenv.config({ path: "./config.env" });
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-app.get("/users", async (req, res) => {
-  const users = await db.select().from(user);
-  res.json(users);
-});
+app.use("/api/auth", authRoutes);
 
-app.get("/create/user", async (req, res) => {
-  const result = await db.insert(user).values({
-    name: "John",
-    email: "john@example.com",
-    password: "22",
-    createdAt: new Date(),
-  });
-  res.json({ message: "Created successfully Bro :)" });
-});
+app.use(errorHandler);
+// app.get("/users", async (req, res) => {
+//   const users = await db.select().from(user);
+//   res.json(users);
+// });
+
+// app.get("/create/user", async (req, res) => {
+//   const result = await db.insert(user).values({
+//     name: "John",
+//     email: "john@example.com",
+//     password: "22",
+//     createdAt: new Date(),
+//   });
+//   res.json({ message: "Created successfully Bro :)" });
+// });
 
 // app.use("/api/user", userRoutes);
 
