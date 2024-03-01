@@ -4,7 +4,7 @@ import { db } from "./db/connection";
 import { user } from "./db/schemas/schema";
 import errorHandler from "./utils/error.handler";
 const authRoutes = require("./routes/auth.routes");
-dotenv.config({ path: "./config.env" });
+dotenv.config();
 const app = express();
 const port = 3000;
 
@@ -18,15 +18,15 @@ app.use(errorHandler);
 //   res.json(users);
 // });
 
-// app.get("/create/user", async (req, res) => {
-//   const result = await db.insert(user).values({
-//     name: "John",
-//     email: "john@example.com",
-//     password: "22",
-//     createdAt: new Date(),
-//   });
-//   res.json({ message: "Created successfully Bro :)" });
-// });
+app.get("/create/user", async (req, res) => {
+  const result = await db.insert(user).values({
+    name: "John",
+    email: "john@example.com",
+    password: "123",
+    createdAt: new Date(),
+  });
+  res.json({ message: "Created successfully Bro :)" });
+});
 
 // app.use("/api/user", userRoutes);
 
