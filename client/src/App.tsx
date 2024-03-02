@@ -2,52 +2,40 @@ import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
+import ErrorPage from "./pages/Error/ErrorPage";
+import Root from "./pages/Root/Root";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 export const router = createBrowserRouter([
   {
-    id: "root",
     path: "/",
-    // loader() {
-    //   // Our root route always provides the user, if logged in
-    //   return { user: fakeAuthProvider.username };
-    // },
-    // Component: Layout,
+    element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        Component: Home,
+        path: "/",
+        element: <Home />,
       },
-      // {
-      //   path: "login",
-      //   action: loginAction,
-      //   loader: loginLoader,
-      //   Component: LoginPage,
-      // },
       {
-        path: "login",
-        // loader: protectedLoader,
-        Component: Home,
+        path: "pricing",
+        element: <div>pricing</div>,
       },
     ],
   },
   {
-    path: "/logout",
-    async action() {
-      // We signout in a "resource route" that we can hit from a fetcher.Form
-      // await fakeAuthProvider.signout();
-      // return redirect("/");
-    },
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 
 //inspiration : https://game-host.pl/
 function App() {
-  return (
-    <>
-      <Header />
-      <Home />
-    </>
-  );
+  return <></>;
 }
 
 export default App;

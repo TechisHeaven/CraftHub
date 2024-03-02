@@ -8,10 +8,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
-      {/* <RouterProvider
-        router={router}
-        fallbackElement={<p>Initial Load...</p>}
-      /> */}
     </BrowserRouter>
+    <RouterProvider router={router} fallbackElement={<p>Initial Load...</p>} />
   </React.StrictMode>
 );

@@ -19,7 +19,7 @@
   --dark: #1a1a1a;
 }
 
-* {
+body {
   color: var(--white);
   background-color: var(--background);
 }
