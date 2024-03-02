@@ -6,6 +6,7 @@ import ErrorPage from "./pages/Error/ErrorPage";
 import Root from "./pages/Root/Root";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import Create from "./pages/Create/Create";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "pricing",
         element: <div>pricing</div>,
+      },
+      {
+        path: "Create",
+        element: <Create />,
       },
     ],
   },
