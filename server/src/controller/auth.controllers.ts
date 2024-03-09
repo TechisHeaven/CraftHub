@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import statusHandler from "../utils/status.handler";
-import AuthService, { UserReturn } from "../service/auth.service";
 import { CreateError } from "../utils/errorMessage.handler";
-import { comparePassword } from "../utils/password.handler";
+import AuthService from "../service/auth.service";
+import { UserReturn } from "../types/auth.type";
 
 export default function authController() {
   return {
@@ -13,7 +13,7 @@ export default function authController() {
           throw CreateError(404, "Email and password must be provided");
         }
 
-        const user: UserReturn = await AuthService().loginUserService({
+        const user: UserReturn = await AuthService.loginUserService({
           email,
           password,
         });
@@ -30,7 +30,7 @@ export default function authController() {
             status: statusHandler.ok.code,
             message: "Login successfuly!",
             user: {
-              id: user.id,
+              userID: user.userID,
               name: user.name,
               email: user.email,
             },
@@ -47,7 +47,7 @@ export default function authController() {
           throw CreateError(404, "All Fields must be provided");
         }
 
-        const user: UserReturn = await AuthService().registerUserService({
+        const user: UserReturn = await AuthService.registerUserService({
           name,
           email,
           password,
@@ -65,7 +65,7 @@ export default function authController() {
             status: statusHandler.created.code,
             message: "Register successfuly!",
             user: {
-              id: user.id,
+              userID: user.userID,
               name: user.name,
               email: user.email,
             },

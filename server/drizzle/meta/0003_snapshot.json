@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "b6b33dde-d3fc-4b47-ba8f-77b4e714aeda",
-  "prevId": "e8068711-a3bd-4fea-be88-b3da7332d46f",
+  "id": "53cc8a80-bea0-42fc-9643-5b7aaf4e6a38",
+  "prevId": "18adb37b-8979-4c84-aef8-6f4e2f69ea09",
   "tables": {
     "servers": {
       "name": "servers",
@@ -51,10 +51,11 @@
         },
         "isActive": {
           "name": "isActive",
-          "type": "text",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
         },
         "created_at": {
           "name": "created_at",

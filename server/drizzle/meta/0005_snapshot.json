@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "b6b33dde-d3fc-4b47-ba8f-77b4e714aeda",
-  "prevId": "e8068711-a3bd-4fea-be88-b3da7332d46f",
+  "id": "6d831f58-dec9-4d13-8503-abc5a61d4037",
+  "prevId": "c7953368-f546-402b-b36a-63adb7d9eb91",
   "tables": {
     "servers": {
       "name": "servers",
@@ -44,17 +44,18 @@
         },
         "ramSize": {
           "name": "ramSize",
-          "type": "text",
+          "type": "int",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "isActive": {
-          "name": "isActive",
-          "type": "text",
+        "ServerisActive": {
+          "name": "ServerisActive",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
         },
         "created_at": {
           "name": "created_at",

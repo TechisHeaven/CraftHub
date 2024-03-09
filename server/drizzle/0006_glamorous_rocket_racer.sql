@@ -1,0 +1,1 @@
+ALTER TABLE `servers` MODIFY COLUMN `ramSize` text NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `servers` RENAME COLUMN `isActive` TO `ServerisActive`;

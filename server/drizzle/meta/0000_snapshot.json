@@ -1,38 +1,128 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "08283959-e312-4c9d-bd69-2206d448ef20",
+  "id": "e8068711-a3bd-4fea-be88-b3da7332d46f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "servers": {
+      "name": "servers",
+      "columns": {
+        "serverID": {
+          "name": "serverID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "adminUserID": {
+          "name": "adminUserID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "serverName": {
+          "name": "serverName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "containerID": {
+          "name": "containerID",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "serverURL": {
+          "name": "serverURL",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ramSize": {
+          "name": "ramSize",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "isActive": {
+          "name": "isActive",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "servers_serverID_unique": {
+          "name": "servers_serverID_unique",
+          "columns": [
+            "serverID"
+          ]
+        },
+        "servers_adminUserID_unique": {
+          "name": "servers_adminUserID_unique",
+          "columns": [
+            "adminUserID"
+          ]
+        },
+        "servers_containerID_unique": {
+          "name": "servers_containerID_unique",
+          "columns": [
+            "containerID"
+          ]
+        },
+        "servers_serverURL_unique": {
+          "name": "servers_serverURL_unique",
+          "columns": [
+            "serverURL"
+          ]
+        }
+      }
+    },
     "user": {
       "name": "user",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
+        "userID": {
+          "name": "userID",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": true
+          "autoincrement": false
         },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "email": {
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "password": {
           "name": "password",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "role": {
@@ -52,15 +142,15 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "user_id": {
-          "name": "user_id",
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "user_userID_unique": {
+          "name": "user_userID_unique",
           "columns": [
-            "id"
+            "userID"
           ]
         }
-      },
-      "uniqueConstraints": {}
+      }
     }
   },
   "schemas": {},

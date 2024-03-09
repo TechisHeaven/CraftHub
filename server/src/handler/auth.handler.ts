@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export default function JWTtokenHandler() {
   return {
     generateRefreshToken: async (payload: {
-      id: string | number;
+      userID: string | number;
       email: string;
     }) => {
       const secret = process.env.JWT_SECRET_SESSION!;
