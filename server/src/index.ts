@@ -16,24 +16,13 @@ app.use("/api/auth", authRoutes);
 app.use("/api/server", serverRoutes);
 
 app.use(errorHandler);
-// app.get("/users", async (req, res) => {
-//   const users = await db.select().from(user);
-//   res.json(users);
-// });
 
-app.get("/create/user", async (req, res) => {
-  const userID = uuid4();
-  const result = await db.insert(user).values({
-    userID,
-    name: "John",
-    email: "john@example.com",
-    password: "123",
-    createdAt: new Date(),
+app.get("*", function (req, res) {
+  return res.status(404).json({
+    status: 404,
+    message: "Route not found",
   });
-  res.json({ message: "Created successfully Bro :)" });
 });
-
-// app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!! test 2nd time");
