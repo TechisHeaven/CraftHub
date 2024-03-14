@@ -9,6 +9,16 @@ const serverService = {
     const serverID = uuid4();
     const adminUserID = uuid4();
     const containerID = uuid4();
+
+    //check duplicate server url
+    const checkDuplicateURL = await db
+      .select()
+      .from(minecraftServer)
+      .where(eq(minecraftServer.serverURL, data.serverURL));
+
+    if (checkDuplicateURL[0]) {
+      throw new Error("Duplicate server URL");
+    }
     const result = await db.insert(minecraftServer).values({
       serverID: serverID,
       adminUserID: adminUserID,
@@ -18,7 +28,14 @@ const serverService = {
       ramSize: data.ramSize || "1024",
       createdAt: new Date(),
     });
-    return result;
+
+    if (result[0]) {
+      const server = await db
+        .select()
+        .from(minecraftServer)
+        .where(eq(minecraftServer.serverID, serverID));
+      return server[0];
+    }
   },
   async fetchServerByID(id: string) {
     const result = await db
@@ -54,6 +71,13 @@ const serverService = {
         .where(eq(minecraftServer.serverID, id));
       return server[0];
     }
+  },
+  async DeleteServer(id: string) {
+    const result = await db
+      .delete(minecraftServer)
+      .where(eq(minecraftServer.serverID, id));
+
+    return result[0];
   },
 };
 

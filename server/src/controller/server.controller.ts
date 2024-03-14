@@ -7,16 +7,17 @@ import { validateRequiredFields } from "../utils/helper.validateFields";
 
 export default function serverController() {
   return {
+    //create a new server
     async create(req: Request, res: Response, next: NextFunction) {
       try {
-        const { serverName }: ServerData = req.body;
-        if (!serverName) {
+        const { serverName, serverURL }: ServerData = req.body;
+        if (!serverName && !serverURL) {
           throw new Error("Fields must be provided");
         }
         const result = await serverService.createServer({
           serverName,
           ramSize: "1024",
-          serverURL: "https://testserver.io",
+          serverURL: serverURL,
         });
         if (!result) {
           res.status(statusHandler.conflict.code).json({
@@ -36,6 +37,7 @@ export default function serverController() {
         next(error);
       }
     },
+    //fetch server by id
     async fetchServerByID(req: Request, res: Response, next: NextFunction) {
       try {
         const id: string = req.params.id;
@@ -58,7 +60,7 @@ export default function serverController() {
         next(error);
       }
     },
-
+    //fetch all servers by user id
     async fetchServersByUserID(
       req: Request,
       res: Response,
@@ -85,7 +87,7 @@ export default function serverController() {
         next(error);
       }
     },
-
+    //update server information
     async UpdateServer(req: Request, res: Response, next: NextFunction) {
       try {
         const id: string = req.params.id;
@@ -119,6 +121,28 @@ export default function serverController() {
           status: statusHandler.ok.code,
           message: "Servers Updated successfuly!",
           server: result,
+        });
+      } catch (error) {
+        next(error);
+      }
+    },
+    //delete server
+    async DeleteServer(req: Request, res: Response, next: NextFunction) {
+      try {
+        const id: string = req.params.id;
+
+        if (!id) {
+          CreateError(statusHandler.notFound.code, "ID must be required");
+        }
+
+        const result = await serverService.DeleteServer(id);
+        if (result.affectedRows <= 0 || !result) {
+          CreateError(statusHandler.badRequest.code, "Failed to Delete server");
+        }
+        res.status(statusHandler.ok.code).json({
+          success: true,
+          status: statusHandler.ok.code,
+          message: "Servers Deleted successfuly!",
         });
       } catch (error) {
         next(error);

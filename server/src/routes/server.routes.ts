@@ -10,7 +10,9 @@ router.route("/").post(serverController().create);
 router.route("/:id").get(serverController().fetchServerByID);
 //*fetch servers by id route
 router.route("/servers/:id").get(serverController().fetchServersByUserID);
-//*Udpdate servers by id route
+//*Update servers by id route
 router.route("/:id").put(serverController().UpdateServer);
+//*Delete servers by id route
+router.route("/:id").delete(serverController().DeleteServer);
 
 module.exports = router;

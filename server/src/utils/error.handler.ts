@@ -8,5 +8,5 @@ export default (
 ) => {
   const status = error.status || 500;
   const message = error.message || "Internal Server Error";
-  res.status(status).json({ error: { status, message } });
+  res.status(status).json({ status, message, success: false });
 };
