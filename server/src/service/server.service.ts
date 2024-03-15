@@ -79,6 +79,22 @@ const serverService = {
 
     return result[0];
   },
+  async startServerContainer(id: string) {
+    const result = await db
+      .update(minecraftServer)
+      .set({ ServerisActive: true })
+      .where(eq(minecraftServer.containerID, id));
+
+    return result;
+  },
+  async StopServerContainer(id: string) {
+    const result = await db
+      .update(minecraftServer)
+      .set({ ServerisActive: false })
+      .where(eq(minecraftServer.containerID, id));
+
+    return result;
+  },
 };
 
 export default serverService;
