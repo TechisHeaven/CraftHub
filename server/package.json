@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "tsc",
+    "studio": "npx drizzle-kit studio",
     "lint": "node lint",
     "migrations:generate": "drizzle-kit generate:mysql",
     "migrations:push": "drizzle-kit push:mysql",

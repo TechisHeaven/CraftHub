@@ -4,13 +4,14 @@ import statusHandler from "../utils/status.handler";
 import { ServerData } from "../types/server.type";
 import { CreateError } from "../utils/errorMessage.handler";
 import { validateRequiredFields } from "../utils/helper.validateFields";
+import minecraftController from "./minecraft.controller";
 
 export default function serverController() {
   return {
     //create a new server
     async create(req: Request, res: Response, next: NextFunction) {
       try {
-        const { serverName, serverURL }: ServerData = req.body;
+        const { serverName, serverURL, ramSize }: ServerData = req.body;
         if (!serverName && !serverURL) {
           throw new Error("Fields must be provided");
         }
@@ -27,9 +28,20 @@ export default function serverController() {
             status: statusHandler.conflict.code,
           });
         }
+        // run minecraft server
+        await minecraftController()
+          .startMinecraftServer(serverName, "1024")
+          .then((containerId) => {
+            console.log(`Container started successfully. ID: ${containerId}`);
+            // Here you can send the container ID back to your server
+          })
+          .catch((error) => {
+            console.error("Error starting container:", error);
+            // Handle error
+          });
+
         res.status(statusHandler.ok.code).json({
           success: true,
-          status: statusHandler.ok.code,
           message: "Server Created successfuly!",
           server: result,
         });
