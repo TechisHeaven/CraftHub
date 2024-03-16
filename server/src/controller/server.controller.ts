@@ -39,6 +39,7 @@ export default function serverController() {
         await minecraftController().createMinecraftServer(containerID, "1024");
         res.status(statusHandler.ok.code).json({
           success: true,
+          status: 201,
           message: "Server Created successfuly!",
           server: result,
         });

@@ -1,4 +1,4 @@
-import { useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -14,6 +14,12 @@ export default function ErrorPage() {
       <p>
         <i>{error.statusText || error.message}</i>
       </p>
+      <Link
+        className="bg-blue-500 p-2 px-4 rounded-md hover:bg-blue-600"
+        to="/"
+      >
+        Home
+      </Link>
     </div>
   );
 }

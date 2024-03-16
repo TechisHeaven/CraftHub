@@ -27,7 +27,7 @@ const Home = () => {
             <BsEmojiSmile />
             <p>Start your adventure with us</p>
             <Link
-              to="/create"
+              to="/servers"
               className="p-2 border rounded-full px-6 text-white bg-background hover:bg-backgroundSecondary transition-colors"
             >
               Start

@@ -4,12 +4,13 @@ import { db } from "./db/connection";
 import { user } from "./db/schemas/schema";
 import errorHandler from "./utils/error.handler";
 import uuid4 from "uuid4";
+import cors from "cors";
 const authRoutes = require("./routes/auth.routes");
 const serverRoutes = require("./routes/server.routes");
 dotenv.config();
 const app = express();
 const port = 3000;
-
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
