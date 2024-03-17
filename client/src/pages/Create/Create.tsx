@@ -10,6 +10,8 @@ import { z } from "zod";
 import { ServerService } from "../../service/server.service";
 import { useNavigate } from "react-router-dom";
 
+import { ServerData } from "../../types/main.types";
+
 const Create = () => {
   let [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -28,20 +30,26 @@ const Create = () => {
 
   const handleCreate = async () => {
     const { serverName } = FormData;
-    let result = await ServerService.CreateServer(serverName);
-    console.log(result);
-    if (result?.status !== 201) {
-      const errorMessage = result?.message;
+
+    try {
+      await ServerService.CreateServer(
+        serverName,
+        (response: {
+          success: boolean;
+          status: number;
+          message: string;
+          server: ServerData;
+        }) => {
+          if (response.status === 201 || response.status === 200) {
+            navigate(`/server/${response.server.serverID}`);
+          }
+        }
+      );
+    } catch (err: any) {
       setError("serverName", {
         type: "manual",
-        message: errorMessage,
+        message: err.message,
       });
-      return;
-    }
-
-    if (result.status === 201) {
-      console.log(result.server.serverID, result);
-      navigate(`/server/${result.server.serverID}`);
     }
   };
 
